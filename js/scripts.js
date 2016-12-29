@@ -1,8 +1,17 @@
-//8.4
-var 
-	a = prompt('Wysokosc trojkata');
-	h = prompt('Podstawa trojkata');
-	triangleArea = a*h/2 
+//8.5
+var
+	a = 2;
+ 	b = 3;
+  value = (a*a) + (2 * a * b) - (b*b);
 
-alert('Pole trójkata wynosi: ' +  triangleArea);
-console.log('Pole trójkata o podstawie a: ' + a + ' i wysokosci h: ' + h + ' wynosi: ' + triangleArea);
+console.log(value);
+
+if (value > 0) {
+  	console.log('Wynik dodatni')
+}
+else if (value < 0) { 
+  	console.log('Wynik ujemny')
+}
+else if (value == 0) {
+  	console.log('Zero')
+}
