@@ -1,19 +1,15 @@
 //8.6
-var 
-	womensNames = ['Asia', 'Kasia', 'Ola', 'Jola'];
-	mensNames = ['Piotrek', 'Marek', 'Arek', 'Jarek'];
-	allNames = womensNames.concat(mensNames);
-	newName = prompt('Wpisz imię: ');
-	indexNewName = allNames.indexOf(newName);
+function getTriangleArea(a, h) {
+	if ((a > 0) && (h > 0)) {
+		return (a * h / 2 );
+		}	
+     console.log('Nieprawidłowe dane');
+	}	
 
-console.log(allNames);
+var triangle1Area = getTriangleArea(0, 15);
+var triangle2Area = getTriangleArea(-2, 14); 
+var triangle3Area = getTriangleArea(8, 13);
 
-if (indexNewName == -1) {
-	console.log('Imię może zostać dodane')
-	allNames.push(newName)
-}
-else {
-	console.log('Imię już występuje w tabeli')
-}
-
-console.log(allNames);
+console.log (triangle1Area);
+console.log (triangle2Area);
+console.log (triangle3Area);
