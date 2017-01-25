@@ -15,9 +15,10 @@ var computerResultElem = document.getElementById('js-computerResult');
 var gameState = 'notStarted'
 var	player = {
 		name: '',
-		score: 0,
+		score: 0
 	},
 	computer = {
+		name: 'Computer',
 		score: 0	
 	};
 
@@ -40,8 +41,8 @@ function setGameElements() {
 			newGameElem.style.display = 'block';
 			pickElem.style.display = 'none';
 			resultsElem.style.display = 'none';			
-	}
-}
+	};
+};
 
 setGameElements();
 
@@ -51,17 +52,17 @@ function newGame() {
 	if (player.name) {
 		player.score = computer.score = 0;
 		gameState = 'started';
-		setGameElements();
 		playerNameElem.innerHTML = player.name;
-		setGamePoints();
-	}
-}
 
+		setGamePoints();
+		setGameElements();
+	};
+};
 
 function getComputerPick() {
 	var possiblePicks = ['Rock', 'Paper', 'Scissors'];
 	return possiblePicks[Math.floor(Math.random() * 3)];
-}
+};
 
 function playerPick(playerPick) {
     var computerPick = getComputerPick();
@@ -70,53 +71,55 @@ function playerPick(playerPick) {
     computerPickElem.innerHTML = computerPick;
 
     checkRoundWinner(playerPick, computerPick);
-}
+};
 
 function setGamePoints() {
 	playerPointsElem.innerHTML = player.score;
 	computerPointsElem.innerHTML = computer.score;
-}
+};
 
 function checkRoundWinner(playerPick, computerPick) {
 	playerResultElem.innerHTML = computerResultElem.innerHTML = '';
 
-	var winnerIs = 'player';
+	var winnerIs = player;
 
 	if (playerPick == computerPick) {
-		winnerIs = 'noone'; 
 		playerResultElem.innerHTML = 'Draw!';
 		computerResultElem.innerHTML = 'Draw!';
-
+		
+		winnerIs = 'noone';
+		return;
 	} else if (
 		(computerPick == 'Rock' && playerPick == 'Scissors') ||
 		(computerPick == 'Scissors' && playerPick == 'Paper') ||
 		(computerPick == 'Paper' && playerPick == 'Rock')) {
-
-		winnerIs = 'computer';
+		
+		winnerIs = computer;
 	}
 
-	if (winnerIs == 'player') {
-		playerResultElem.innerHTML = "You win!";
-		player.score++;
-	} else if (winnerIs == 'computer') {
-		computerResultElem.innerHTML = "Computer Win!";
-		computer.score++;
-	}
+	getWinnerInfo(winnerIs);
+};
+
+function getWinnerInfo(winnerIs) {
+	
+	(winnerIs == player) ? (playerResultElem.innerHTML = "You win!"): (computerResultElem.innerHTML = "Computer Win!");
+	winnerIs.score++;
 	
 	setGamePoints();
+	checkMatchWinner(winnerIs);
+};
+
+function checkMatchWinner(winnerIs) {
 	
-	if (player.score === 5 || computer.score === 5) {
-		if (player.score > computer.score) {
-			alert(player.name + ' won!');
-		}
-		else {
-			alert('Computer won!');
-		}
-		
+	if (winnerIs.score === 5) { 
+		alert(winnerIs.name + ' won this Match!');
 		gameState = 'ended';
+		
 		setGameElements();
+		
 		playerResultElem.innerHTML = computerResultElem.innerHTML = '';
 		playerPickElem.innerHTML = computerPickElem.innerHTML = '';
-	}
-}
+	};
+	
+};
 
